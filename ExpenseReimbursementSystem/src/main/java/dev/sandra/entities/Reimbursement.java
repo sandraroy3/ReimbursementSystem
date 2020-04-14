@@ -3,10 +3,13 @@ package dev.sandra.entities;
 public class Reimbursement {
 
 	private int rId;
+	
 	private int amount;
 	private String description;
-	private int requesterId;
 	private String status;
+	
+	private int requesterId;
+	
 	
 	
 	public Reimbursement() {
