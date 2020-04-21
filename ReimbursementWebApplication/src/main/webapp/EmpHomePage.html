@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>Employee Home Page</h1>
+    <h2> Welcome to Home Page </h2>
+    <h2 id="usernameHeading"></h2>
+
+    <button onclick="createReimb()"> Reimbursements </button>
+</body>
+
+<script>
+
+//functio that sends a usernme to a LoginServlet that attaches
+//that username 
+    async function showUser(){
+        //let username=document.getElementById("usernameHeading").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpHomePageServ");
+
+        
+        let body= await httpResponse.text();
+
+        document.getElementById("usernameHeading").innerHTML = body;
+
+        console.log("Finished showuser(). Logged in user"+body);
+
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+       // window.location.href = "http://localhost:8080/ServletAdvanced/Home.html";
+        
+    }
+    showUser()
+
+    async function createReimb(){
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpReimbPage.html";
+    }
+</script>
+</html>

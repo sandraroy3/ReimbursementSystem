@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>Create Reimbursement Page</h1>
+    <h2> Enter Amount</h2>
+    <input id="amtInput" type="text" placeholder="userName">
+    <h2> Enter description</h2>
+    <input id="descInput" type="text" placeholder="password">
+
+    <button onclick="subReimb()"> Submit Reimbursement </button>
+</body>
+
+<script>
+
+//functio that sends a usernme to a LoginServlet that attaches
+//that username 
+    async function subReimb(){
+        let amt=document.getElementById("amtInput").value;
+        let desc=document.getElementById("descInput").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpSubmitReimbServ?amt="+amt+"&desc="+desc);
+        //let body=httpResponse.json();
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+        
+    }
+</script>
+</html>

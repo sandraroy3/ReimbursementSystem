@@ -1,0 +1,35 @@
+<html>
+<body>
+
+
+
+<h2>All Reimbursements</h2>
+<button id="allReimbsBtn"> Get all Reimbursements</button>
+
+<table id="ReimbTable">
+  <tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th></thead> </tr>
+  <tr >
+</table>
+
+</body>
+
+<script>
+
+      document.getElementById("allReimbsBtn").addEventListener("click",getAllReimbs)
+      
+      async function getAllReimbs(){
+          let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpGetReimbServ");
+          let reimbs= await httpResponse.json();
+
+          let tableData=document.getElementById("taskTable");
+
+          for(reimb of tasks){
+              tableData.innerHTML=tableData.innerHTML + `<tr> 
+                                <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.desc} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} `;
+          }
+          console.log(tasks);
+
+      }
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>Employee Login Page</h1>
+    <h2> Enter Employee Username</h2>
+    <input id="userNameInput" type="text" placeholder="userName">
+    <h2> Enter Employee Password</h2>
+    <input id="passwordInput" type="text" placeholder="password">
+
+    <button onclick="login()"> Login </button>
+</body>
+
+<script>
+
+//functio that sends a usernme to a LoginServlet that attaches
+//that username 
+    async function login(){
+        let username=document.getElementById("userNameInput").value;
+        let password=document.getElementById("passwordInput").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmploginServlet?username="+username+"&password="+password);
+        //let body=httpResponse.json();
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+        
+    }
+</script>
+</html>
