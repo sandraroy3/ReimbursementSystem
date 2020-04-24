@@ -21,14 +21,14 @@ public class ManagerServiceImpl implements ManagerServices{
 	}
 
 	@Override
-	public List<Reimbursement> viewAllReimbursements() {
-		List<Reimbursement> reimbursements=reimbdao.retrieveAllReimbursements();
+	public List<Reimbursement> viewAllReimbursementsbyMId(int id) {
+		List<Reimbursement> reimbursements=reimbdao.retrieveAllReimbursementsByMId(id);
 		return reimbursements;
 	}
 
 	@Override
-	public List<Reimbursement> submittedReimbursements() {
-		List<Reimbursement> subreimbursements =reimbdao.retrieveSubmittedTasks();
+	public List<Reimbursement> submittedReimbursements(int id) {
+		List<Reimbursement> subreimbursements =reimbdao.retrieveSubmittedTasksByMId(id);
 		return subreimbursements;
 	}
 

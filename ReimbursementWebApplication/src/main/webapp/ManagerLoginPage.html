@@ -6,7 +6,7 @@
 
      <style>
       body {
-          background-image: url('ProdigyBigBg.jpg');
+          background-image: url('ProdigyMan.jpg');
            background-repeat: no-repeat; 
            background-attachment: fixed; 
           /*  background-size: cover;  */
@@ -53,7 +53,7 @@
 <br>
 <br>
 <div class="box">
-<h3>Employee Login Page</h1>
+<h3>Manager Login Page</h1>
     Enter Username<input id="userNameInput" type="text" placeholder="username">
     <br>
    
@@ -75,12 +75,12 @@
         let username=document.getElementById("userNameInput").value;
         let password=document.getElementById("passwordInput").value;
 
-        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmploginServlet?username="+username+"&password="+password);
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManagerServlet?username="+username+"&password="+password);
         //let body=httpResponse.json();
 
         //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
 
-        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/ManHomePage.html";
         
     }
 </script>

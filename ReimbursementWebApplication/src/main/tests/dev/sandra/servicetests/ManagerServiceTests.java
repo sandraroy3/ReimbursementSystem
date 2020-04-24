@@ -42,28 +42,28 @@ public class ManagerServiceTests {
 	}*/
 	
 	
-	/* @Test
-	public void getAllReimb(){
-		List<Reimbursement> reimb=managserv.viewAllReimbursements();
-		System.out.println(reimb);
-	}*/
+	@Test
+	public void getAllReimbByMid(){
+		List<Reimbursement> reimb=managserv.viewAllReimbursementsbyMId(1);
+		System.out.println("All reimb "+reimb);
+	}
 	
-	/* @Test
+	 @Test
 		public void getAllSubReimb(){
-			List<Reimbursement> reimb=managserv.submittedReimbursements();
-			System.out.println(reimb);
-		}*/
-	 
-	 /*@Test
-		public void approveReimb(){
-			Reimbursement reimb=managserv.approveReimbursement(3);
-			System.out.println(reimb);
-		}*/
+			List<Reimbursement> reimb=managserv.submittedReimbursements(1);
+			System.out.println("All sub reimb "+reimb);
+		}
 	 
 	 @Test
+		public void approveReimb(){
+			Reimbursement reimb=managserv.approveReimbursement(2);
+			System.out.println("Approved reimb "+reimb);
+		}
+	 
+	/* @Test
 		public void denyReimb(){
 			Reimbursement reimb=managserv.denyReimbursement(2);
 			System.out.println(reimb);
-		}
+		}*/
 
 }

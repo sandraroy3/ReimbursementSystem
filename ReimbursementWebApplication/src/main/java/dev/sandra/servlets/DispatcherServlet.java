@@ -33,6 +33,16 @@ public class DispatcherServlet extends HttpServlet {
 		                               break;
 		case "/ReimbursementWebApplication/api/EmpGetReimbServ": controller.EmpGetReimb(request, response);
         break;
+        
+        
+		case "/ReimbursementWebApplication/api/ManloginServlet": controller.ManLogin(request, response);
+						break;
+		case "/ReimbursementWebApplication/api/ManHomePageServ": controller.ManHome(request, response);
+		   break;
+		case "/ReimbursementWebApplication/api/ManGetReimbServ": controller.ManGetReimb(request, response);
+			break;
+		/*case "/ReimbursementWebApplication/api/EmpGetReimbServ": controller.EmpGetReimb(request, response);
+			break;*/
 		                               
 		/*case "/ReimbursementWebApplication/api/addtask": tcontroller.addTask(request, response);
                                        break;

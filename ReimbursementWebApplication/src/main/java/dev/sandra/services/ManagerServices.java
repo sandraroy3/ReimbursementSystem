@@ -10,8 +10,8 @@ public interface ManagerServices {
 	Manager loginManager(String username, String password);
 	
 
-	public List<Reimbursement> viewAllReimbursements();
-	public List<Reimbursement> submittedReimbursements();
+	public List<Reimbursement> viewAllReimbursementsbyMId(int id);
+	public List<Reimbursement> submittedReimbursements(int id);
 	
 	//public Reimbursement submitReimbursement(Reimbursement reimbursement);
 

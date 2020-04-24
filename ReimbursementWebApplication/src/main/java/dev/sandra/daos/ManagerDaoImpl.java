@@ -30,9 +30,9 @@ public class ManagerDaoImpl implements ManagerDao{
 			
             return manager;
 		}catch (SQLException e) {
-			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 
 //	@Override

@@ -8,8 +8,9 @@ public class Reimbursement {
 	private String description;
 	private String status;
 	
-	private int requesterId;
 	
+	private int requesterId;
+	private int mId;
 	
 	
 	public Reimbursement() {
@@ -18,13 +19,14 @@ public class Reimbursement {
 	
 	
 	
-	public Reimbursement(int rId, int amount, String description, int requesterId, String status) {
+	public Reimbursement(int rId, int amount, String description, String status,int requesterId,int mId) {
 		super();
 		this.rId = rId;
 		this.amount = amount;
 		this.description = description;
-		this.requesterId = requesterId;
 		this.status = status;
+		this.requesterId = requesterId;
+		this.mId=mId;
 	}
 
 
@@ -60,10 +62,26 @@ public class Reimbursement {
 		this.status = status;
 	}
 
+	
+
+
+
 	@Override
 	public String toString() {
-		return "Reimbursement [rId=" + rId + ", amount=" + amount + ", description=" + description + ", requesterId="
-				+ requesterId + ", status=" + status + "]";
+		return "Reimbursement [rId=" + rId + ", amount=" + amount + ", description=" + description + ", status="
+				+ status + ", requesterId=" + requesterId + ", mId=" + mId + "]";
+	}
+
+
+
+	public int getmId() {
+		return mId;
+	}
+
+
+
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
 	
 	

@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeServices{
 
 	@Override
 	public List<Reimbursement> viewAllReimbursementsById(int id) {
-		return reimbdao.retrieveAllReimbursementsById(id);
+		return reimbdao.retrieveAllReimbursementsByEId(id);
 
 	}
 	

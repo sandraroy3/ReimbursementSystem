@@ -3,11 +3,12 @@
 <html>
 
 <head>
+	  
+       
 
+<title>Manager Home Page</title>
 
-<title>Bootstrap Example</title>
-
- <style>
+<style>
   .navbar{
    height: 80px; /* Just an example height*/
    }
@@ -18,11 +19,12 @@
      background: -webkit-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
      background: -o-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
      background: linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     /* background: linear-gradient(#8c8c8c, #c4c4c4); */
      border-radius: 6px !important;
      -moz-border-radius: 6px !important;
         }
    .nav a{
-    color: cyan !important;
+    color:cyan !important;
     font-size: 1.8em !important;
     }
   .nav li{
@@ -47,20 +49,21 @@
          
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="EmpHomePage.html">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
+      <li><a href="ManHomePage.html">Home</a></li>
+      <li><a href="ManViewReimbPage.html">View reimbursements</a></li>
+      <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
         <ul class="dropdown-menu" style="background-color:darkblue">
-          <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
+          <li><a href="EmpSubmitReimbPage.html">View reimbursements</a></li>
           <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
          </ul>
-      </li>
+      </li> -->
       <li><a href="#">Update Details</a></li>
       
     </ul>
     
     
     <ul class="nav navbar-nav navbar-right">
-     <li><a href="EmployeeLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+     <li><a href="ManagerLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -69,39 +72,42 @@
 <br>
 <br>
 
-
 <div class="container">
- <img src="ProdigyReimb.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <img src="ProdigyHome.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <br>
+ <br>
+  <h3>Welcome Back $username </h3>
+</div>
 
-    <h1>Create Reimbursement Page</h1>
-    <h2> Enter Amount</h2>
-    <input id="amtInput" type="text" placeholder="Amount">
-    <h2> Enter description</h2>
-    <input id="descInput" type="text" placeholder="Description">
-    <h2> Enter Manger Id</h2>
-    <input id="managerId" type="text" placeholder="Manager Id">
-    <br>
-    <br>
-    <button onclick="subReimb()"> Submit Reimbursement </button>
-  </div>
 </body>
+
 
 <script>
 
-//functio that sends a usernme to a LoginServlet that attaches
+//function that sends a usernme to a LoginServlet that attaches
 //that username 
-    async function subReimb(){
-        let amt=document.getElementById("amtInput").value;
-        let desc=document.getElementById("descInput").value;
-        let mid=document.getElementById("managerId").value;
+    async function showUser(){
+        //let username=document.getElementById("usernameHeading").value;
 
-        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpSubmitReimbServ?amt="+amt+"&desc="+desc+"&mid="+mid);
-        //let body=httpResponse.json();
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManHomePageServ");
+
+        
+        let body= await httpResponse.text();
+
+        document.getElementById("usernameHeading").innerHTML = body;
+
+        console.log("Finished showuser(). Logged in user"+body);
+
 
         //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
 
-        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+       // window.location.href = "http://localhost:8080/ServletAdvanced/Home.html";
         
+    }
+    showUser()
+
+    async function createReimb(){
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpReimbPage.html";
     }
 </script>
 </html>

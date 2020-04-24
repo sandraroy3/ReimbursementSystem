@@ -12,11 +12,14 @@ public interface ReimbursementDao {
 	
 	//Reimbursement markRe(Task task);
 	
-	Reimbursement getReimbursementById(int id);
-	List<Reimbursement> retrieveAllReimbursementsById(int id);
-	List<Reimbursement> retrieveAllReimbursements();
+	Reimbursement getReimbursementByRId(int id);
+	List<Reimbursement> retrieveAllReimbursementsByEId(int id);
+	//List<Reimbursement> retrieveAllReimbursements();
 	
-	List<Reimbursement> retrieveSubmittedTasks();
+	
+	List<Reimbursement> retrieveAllReimbursementsByMId(int id);
+
+	List<Reimbursement> retrieveSubmittedTasksByMId(int id);
 	//List<Reimbursement> retrieveCompletedTasks();
 	
 	Reimbursement approveReimbursement(int id);

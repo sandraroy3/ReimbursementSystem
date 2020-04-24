@@ -16,7 +16,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	@Override
 	public Reimbursement createReimbursement(Reimbursement reimbursement) {
 			try(Connection conn=ConnectionUtils.createConnection()){
-				String sql="INSERT INTO Project1Reimbursements.REIMBURSEMENT VALUES(?,?,?,?,?)";
+				String sql="INSERT INTO Project1Reimbursements.REIMBURSEMENT VALUES(?,?,?,?,?,?)";
 				PreparedStatement ps=conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				
 				ps.setInt(1, 0);
@@ -24,6 +24,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 				ps.setString(3, reimbursement.getDescription());
 				ps.setString(4, reimbursement.getStatus());
 				ps.setInt(5, reimbursement.getRequesterId());
+				ps.setInt(6, reimbursement.getmId());
 				
 				ps.execute();
 				
@@ -43,7 +44,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	
 
 	@Override
-	public Reimbursement getReimbursementById(int id) {
+	public Reimbursement getReimbursementByRId(int id) {
 		try(Connection conn=ConnectionUtils.createConnection()){
 			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE R_ID=?";
 			PreparedStatement ps=conn.prepareStatement(sql);
@@ -58,7 +59,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 			ps.setString(3, reimbursement.getDescription());
 			ps.setString(4, reimbursement.getStatus());
 			ps.setInt(5, reimbursement.getRequesterId());
-			
+			ps.setInt(6, reimbursement.getmId());
 			
 			
 			return reimbursement;
@@ -69,7 +70,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	}
 
 	@Override
-	public List<Reimbursement> retrieveAllReimbursementsById(int id) {
+	public List<Reimbursement> retrieveAllReimbursementsByEId(int id) {
 		try(Connection conn= ConnectionUtils.createConnection()){
 			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE E_ID=?";
 	        PreparedStatement ps=conn.prepareStatement(sql);
@@ -85,8 +86,9 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	        	reimbursement.setrId(rs.getInt("R_ID"));
 	        	reimbursement.setAmount(rs.getInt("AMOUNT"));
 	        	reimbursement.setDescription(rs.getString("DESCRIPTION"));
-	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
 	        	reimbursement.setStatus(rs.getString("STATUS"));
+	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
+	        	reimbursement.setmId(rs.getInt("M_ID"));
 	       
 	        
 	        	reimbursements.add(reimbursement);
@@ -99,11 +101,11 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	}
 	
 	@Override
-	public List<Reimbursement> retrieveSubmittedTasks() {
+	public List<Reimbursement> retrieveAllReimbursementsByMId(int id) {
 		try(Connection conn= ConnectionUtils.createConnection()){
-			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE STATUS=?";
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE M_ID=?";
 	        PreparedStatement ps=conn.prepareStatement(sql);
-	        ps.setString(1, "SUBMITTED");
+	        ps.setInt(1, id);
 	        
 	        ResultSet rs=ps.executeQuery();
 	        
@@ -117,6 +119,39 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	        	reimbursement.setDescription(rs.getString("DESCRIPTION"));
 	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
 	        	reimbursement.setStatus(rs.getString("STATUS"));
+	        	reimbursement.setmId(rs.getInt("M_ID"));
+	       
+	        
+	        	reimbursements.add(reimbursement);
+	        }
+	        return reimbursements;
+		}catch(SQLException e) {
+	  	e.printStackTrace();
+	   }
+	return null;
+	}
+	
+	@Override
+	public List<Reimbursement> retrieveSubmittedTasksByMId(int id) {
+		try(Connection conn= ConnectionUtils.createConnection()){
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE STATUS=? AND M_ID=?";
+	        PreparedStatement ps=conn.prepareStatement(sql);
+	        ps.setString(1, "SUBMITTED");
+	        ps.setInt(2, id);
+	        
+	        ResultSet rs=ps.executeQuery();
+	        
+	        List<Reimbursement> reimbursements=new ArrayList<Reimbursement>();
+	        
+	        while(rs.next()) {
+	        
+	        	Reimbursement reimbursement=new Reimbursement();
+	        	reimbursement.setrId(rs.getInt("R_ID"));
+	        	reimbursement.setAmount(rs.getInt("AMOUNT"));
+	        	reimbursement.setDescription(rs.getString("DESCRIPTION"));
+	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
+	        	reimbursement.setStatus(rs.getString("STATUS"));
+	        	reimbursement.setmId(rs.getInt("M_ID"));
 	       
 	        
 	        	reimbursements.add(reimbursement);
@@ -129,7 +164,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	}
 	
 	
-	@Override
+	/*@Override
 	public List<Reimbursement> retrieveAllReimbursements() {
 		try(Connection conn= ConnectionUtils.createConnection()){
 			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT";
@@ -156,7 +191,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	  	e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 
 
 	
@@ -210,6 +245,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

@@ -29,8 +29,9 @@ public class EmployeeDaoImpl implements EmployeeDao{
             return employee;
 		}catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 
 //	public Employee updateEmployee(Employee employee) {
