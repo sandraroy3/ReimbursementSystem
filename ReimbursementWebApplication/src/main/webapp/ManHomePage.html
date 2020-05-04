@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	  
+       
+
+<title>Manager Home Page</title>
+
+<style>
+  .navbar{
+   height: 80px; /* Just an example height*/
+   }
+   
+   nav {
+     width: 100%;
+     height: 80px;
+     background: -webkit-linear-gradient(#3c4257, #424e53, #15969a, #151388, #157f9a);
+     background: -o-linear-gradient(#040e2e, rgb(2, 30, 41), #023d3f, #040346, #023e4d);
+     background: linear-gradient(#212b4d, #1e3e4b, #295557, #292958, #254b55);
+     /* background: linear-gradient(#8c8c8c, #c4c4c4); */
+     border-radius: 6px !important;
+     -moz-border-radius: 6px !important;
+        }
+   .nav a{
+    color:cyan !important;
+    font-size: 1.8em !important;
+    }
+  .nav li{
+    padding-right:5px;
+    }
+</style>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" height="300px">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+         
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="ManHomePage.html">Home</a></li>
+      <!-- <li><a href="ManViewReimbPage.html">View reimbursements</a></li> -->
+      <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
+        <ul class="dropdown-menu" style="background-color:darkblue">
+          <li><a href="EmpSubmitReimbPage.html">View reimbursements</a></li>
+          <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
+         </ul>
+      </li> -->
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
+        <ul class="dropdown-menu" style="background-color:darkblue">
+          <li><a href="ManViewReimbPage.html">View All Reimbursements</a></li>
+          <li><a href="ManViewSubReimbPage.html">View All Submitted Reimbursements</a></li>
+         </ul>
+      </li>
+      <li><a href="#">Update Details</a></li>
+      
+    </ul>
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="ManagerLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+ <img src="ProdigyHome.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <br>
+ <br>
+  <h1 style="font-style: inherit; color: maroon;" >Welcome Back </h1>
+  <h2 id="usernameHeading" style="color: orangered;"></h2>
+</div>
+
+</body>
+
+
+<script>
+
+//function that sends a usernme to a LoginServlet that attaches
+//that username 
+    async function showUser(){
+        //let username=document.getElementById("usernameHeading").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManHomePageServ");
+
+        
+        let body= await httpResponse.text();
+
+        document.getElementById("usernameHeading").innerHTML = body;
+
+        console.log("Finished showuser(). Logged in user"+body);
+
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+       // window.location.href = "http://localhost:8080/ServletAdvanced/Home.html";
+        
+    }
+    showUser()
+
+    
+</script>
+</html>

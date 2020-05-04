@@ -1,0 +1,229 @@
+<html>
+
+<head>
+
+<title>Manager View Reimb</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
+   table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding:10px;
+     /* width:200px; 
+     height: 100px;  */
+    }
+    
+    
+  .navbar{
+   height: 80px; /* Just an example height*/
+   }
+   
+   nav {
+     width: 100%;
+     height: 80px;
+     background: -webkit-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: -o-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     border-radius: 6px !important;
+     -moz-border-radius: 6px !important;
+        }
+   .nav a{
+    color:aqua !important;
+    font-size: 1.8em !important;
+    }
+  .nav li{
+    padding-right:5px;
+    }
+
+    </style>
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-inverse" height="300px">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+         
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="ManHomePage.html">Home</a></li>
+      <li><a href="ManViewSubReimbPage.html">View All Submitted Reimbursements</a></li>
+      <li><a href="#">Update Details</a></li>
+      
+    </ul>
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="ManagerLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+ <img src="Reimb.png" alt="prodigyhome" style="float:right;width:300px;height:300px;">
+
+
+ <div class="jumbotron">
+<h2>All Reimbursements</h2>
+<br>
+<br>
+ <button id="allReimbsBtn" class="btn btn-primary btn-lg"> Get all Reimbursements</button>
+<br>
+<br>
+</div>
+
+<table id="ReimbTable">
+  
+</table>
+
+</div>
+
+</body>
+
+<!--  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="..../resources/images/ProdigyBg.jpg">Prodigy</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="EmpHomePage.html">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
+          <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
+         </ul>
+      </li>
+      <li><a href="#">Update Details</a></li>
+      <li><a href="EmployeeLoginPage.html">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+</body>  -->
+
+
+
+<script>
+
+      document.getElementById("allReimbsBtn").addEventListener("click",getAllReimbs)
+      
+      async function getAllReimbs(){
+          let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManGetReimbServ");
+          let reimbs= await httpResponse.json();
+
+          let tableData=document.getElementById("ReimbTable");
+          tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> </tr>
+          <tr >`;
+          for(reimb of reimbs){
+              tableData.innerHTML=tableData.innerHTML + `<tr> 
+               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>`;
+              
+                    
+          }
+
+      }
+        //  async function approveReimb(element){
+            
+        //     let reimb = {};
+        //     reimb.rId = element.getAttribute("rId");
+        //     reimb.amt = Number.parseInt(element.getAttribute("amt"));
+        //     reimb.status = element.getAttribute("status");
+        //     //reimb.priority = Number.parseInt(element.getAttribute("priority"));
+        //     console.log(reimb)
+        //     //console.log(element)
+
+        //       let settings = {
+        //       method:'POST',
+        //         headers:{'Content-Type':'application/json'},
+        //         body: JSON.stringify(reimb)
+        //       }
+
+        //         let httpResponse = await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManApproveReimbServ", settings); 
+
+ 
+        //           let reimbs= await httpResponse.json();
+
+        //           let tableData=document.getElementById("ReimbTable");
+        //           tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> <th>Approve Reimbursement</th> <th>Deny Reimbursement</th> </thead> </tr>
+        //           <tr >`;
+        //           for(reimb of reimbs){
+        //               tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //               <td> <button rId=${reimb.rId} amt=${reimb.amount} status="${reimb.status}" onclick="approveReimb(this);"> Approve Reimbursements</button></td> <td><button rId=${reimb.rId} desc=${reimb.amount} status= "${reimb.status}" onclick="denyReimb(this);"> Deny Reimbursement</button> </td> </tr> `;
+                            
+        //           }
+
+        //     }
+        //       // let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManApproveReimbServ?rid="+`${reimb.requesterId}`);
+        //       // let reimbs= await httpResponse.json();
+
+        //       // let tableData=document.getElementById("ReimbTable");
+
+        //       // for(reimb of reimbs){
+        //       //    tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //       //    <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //       //    <td> <button onclick="approveReimb()"> Approve Reimbursements</button></td> <td><button onclick="denyReimb()"> Deny Reimbursement</button> </td> </tr> `;
+        //       //       }
+        //       //   }
+        //     async function denyReimb(element){
+              
+        //     let reimb = {};
+        //     reimb.rId = element.getAttribute("rId");
+        //     reimb.amt = Number.parseInt(element.getAttribute("amt"));
+        //     reimb.status = element.getAttribute("status");
+        //     //reimb.priority = Number.parseInt(element.getAttribute("priority"));
+        //     console.log(reimb)
+        //     //console.log(element)
+
+        //       let settings = {
+        //       method:'POST',
+        //         headers:{'Content-Type':'application/json'},
+        //         body: JSON.stringify(reimb)
+        //       }
+
+        //         let httpResponse = await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManDenyReimbServ", settings); 
+
+        //           let reimbs= await httpResponse.json();
+
+        //           let tableData=document.getElementById("ReimbTable");
+        //           tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> <th>Approve Reimbursement</th> <th>Deny Reimbursement</th> </thead> </tr>
+        //           <tr >`;
+        //           for(reimb of reimbs){
+        //               tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //               <td> <button rId=${reimb.rId} amt=${reimb.amount} status="${reimb.status}" onclick="approveReimb(this);"> Approve Reimbursements</button></td> <td><button rId=${reimb.rId} desc=${reimb.amount} status= "${reimb.status}" onclick="denyReimb(this);"> Deny Reimbursement</button> </td> </tr> `;
+                            
+        //           }
+
+
+            //     console.log(httpResponse)
+
+            // }
+
+
+      //     console.log(reimbs);
+
+      // }
+      
+      
+</script>
+
+</html>
+

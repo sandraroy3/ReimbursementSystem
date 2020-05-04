@@ -1,0 +1,119 @@
+<html>
+
+<head>
+
+<title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
+   table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding:10px;
+     /* width:200px; 
+     height: 100px;  */
+    }
+    
+    
+  .navbar{
+   height: 80px; /* Just an example height*/
+   }
+   
+   nav {
+     width: 100%;
+     height: 80px;
+     background: -webkit-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: -o-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     border-radius: 6px !important;
+     -moz-border-radius: 6px !important;
+        }
+   .nav a{
+    color:aqua !important;
+    font-size: 1.8em !important;
+    }
+  .nav li{
+    padding-right:5px;
+    }
+
+    </style>
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-inverse" height="300px">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+         
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="EmpHomePage.html">Home</a></li>
+      <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
+      <li><a href="#">Update Details</a></li>
+      
+    </ul>
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="EmployeeLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+ <img src="Reimb.png" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+
+<h2>All Reimbursements</h2>
+<br>
+<br>
+<!-- <button id="allReimbsBtn"> Get all Reimbursements</button> -->
+<br>
+<br>
+<table id="ReimbTable">
+  <tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Manager Id</th> <th>Req. Id</th></thead> </tr>
+  <tr >
+</table>
+
+</div>
+
+</body>
+
+<script>
+
+/*       document.getElementById("allReimbsBtn").addEventListener("click",getAllReimbs) */
+      
+      async function getAllReimbs(){
+          let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpGetReimbServ");
+          let reimbs= await httpResponse.json();
+
+          let tableData=document.getElementById("ReimbTable");
+
+          for(reimb of reimbs){
+              tableData.innerHTML=tableData.innerHTML + `<tr> 
+                                <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.mId} </td> <td> ${reimb.requesterId} </td> `;
+          }
+          console.log(reimbs);
+
+
+      }
+      getAllReimbs();
+      
+      /* function goBackHome(){
+      window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+      }
+      goBackHome(); */
+</script>
+
+</html>

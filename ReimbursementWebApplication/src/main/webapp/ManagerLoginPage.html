@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+     <style>
+      body {
+          background-image: url('EmpLogin.jpeg');
+           background-repeat: no-repeat; 
+           background-attachment: fixed; 
+          /*  background-size: cover;  */
+           background-size: 100% 100%;
+          
+          }
+       
+      .box{
+			margin:0 auto; 
+			width:300px; /* //you can set it in %. */
+			padding:20px;
+			background:#f9f9f9;
+			border:2px solid #333;
+		}
+      </style>
+      
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+
+
+<body style="text-align: center;">
+ <img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="150" height="150"></a>
+<h1>Fusion Welcomes You!</h1>
+<br>
+<br>
+<br>
+
+
+
+<div class="box">
+<img alt="Brand" src="ManAvatar.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
+<h3>Manager Login Page</h1>
+    Enter Username<input id="userNameInput" type="text" placeholder="username">
+    <br>
+   
+    Enter Password<input id="passwordInput" type="password" placeholder="password">
+    
+    <br>
+    <button onclick="login()"> Login </button>
+    
+</div>
+<br>
+<a href="EmployeeLoginPage.html"> Login As Employer</a>
+</body>    
+  
+
+<script>
+
+//function that sends a username to a LoginServlet that attaches
+//that username 
+    async function login(){
+        let username=document.getElementById("userNameInput").value;
+        let password=document.getElementById("passwordInput").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManloginServlet?username="+username+"&password="+password);
+        //let body=httpResponse.json();
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+        window.location.href = "http://localhost:8080/ReimbursementWebApplication/ManHomePage.html";
+        
+    }
+</script>
+</html>

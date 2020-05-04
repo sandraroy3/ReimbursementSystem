@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	  
+       
+
+<title>Emp Home Page</title>
+
+<style>
+  .navbar{
+   height: 80px; /* Just an example height*/
+   }
+   
+   nav {
+     width: 100%;
+     height: 80px;
+     background: -webkit-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: -o-linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     background: linear-gradient(#15349a, #136788, #15969a, #151388, #157f9a);
+     /* background: linear-gradient(#8c8c8c, #c4c4c4); */
+     border-radius: 6px !important;
+     -moz-border-radius: 6px !important;
+        }
+   .nav a{
+    color:cyan !important;
+    font-size: 1.8em !important;
+    }
+  .nav li{
+    padding-right:5px;
+    }
+</style>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" height="300px">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+         
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="EmpHomePage.html">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
+        <ul class="dropdown-menu" style="background-color:darkblue">
+          <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
+          <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
+         </ul>
+      </li>
+      <li><a href="#">Update Details</a></li>
+      
+    </ul>
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="EmployeeLoginPage.html"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+ <img src="ProdigyHome.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <br>
+ <br>
+ <h1 style="font-style: unset; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: maroon;" >Welcome Back </h1>
+ <h2 id="usernameHeading" style="color: orangered;"></h2>
+</div>
+
+</body>
+
+
+<script>
+
+//function that sends a usernme to a LoginServlet that attaches
+//that username 
+    async function showUser(){
+        //let username=document.getElementById("usernameHeading").value;
+
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpHomePageServ");
+
+        
+        let body= await httpResponse.text();
+
+        document.getElementById("usernameHeading").innerHTML = body;
+
+        console.log("Finished showuser(). Logged in user"+body);
+
+
+        //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
+
+       // window.location.href = "http://localhost:8080/ServletAdvanced/Home.html";
+        
+    }
+    showUser()
+
+    // async function createReimb(){
+    //     window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpReimbPage.html";
+    // }
+</script>
+</html>
