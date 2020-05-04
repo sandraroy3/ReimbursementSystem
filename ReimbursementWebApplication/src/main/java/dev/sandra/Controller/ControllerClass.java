@@ -33,18 +33,24 @@ public class ControllerClass {
 		System.out.println(loginemp);
 		
 		if(loginemp==null) {
+			//response.sendRedirect("EmployeeLoginPage.html");
 			response.getWriter().append("Sorry! Login Failed. Try Again"); 
-			//request.getRequestDispatcher("EmployeeLogin.html").include(request, response);
+			System.out.println("Login failed in servlet");
+			//request.getRequestDispatcher("EmployeeLoginPage.html").include(request, response);
 		}
 		
 		else {
+			System.out.println("Login success in servlet");
 			HttpSession sess= request.getSession();
 			sess.setAttribute("empusername", uname);
 			sess.setAttribute("empid", loginemp.geteId());
+			//request.getRequestDispatcher("EmpHomePage.html").forward(request, response);
+			//response.sendRedirect("EmpHomePage.html");
+			//request.getRequestDispatcher("EmpHomePage.html").include(request, response);
+
 			//response.sendRedirect("/ReimbursementWebApplication/api/EmpHomePageServ");
 			//request.getRequestDispatcher("EmpHomePage.html").forward(request, response);
-			
-		}
+			}
 		
 		/*Gson gson = new Gson();	    
 	    String json=gson.toJson(empserv.loginEmployee(uname, pass));
@@ -64,6 +70,10 @@ public class ControllerClass {
 		System.out.println("Username in EmpHomePage Servlet is "+username);
 	 	System.out.println("Emp id in EmpHomePage Servlet is "+eid);
 		response.getWriter().append(username);
+		//request.getRequestDispatcher("EmpHomePage.html").forward(request, response);
+		//request.getRequestDispatcher("EmpHomePage.html").forward(request, response);
+		//response.sendRedirect("EmpHomePage.html");
+		
 		//response.getWriter().append(username);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -92,20 +102,6 @@ public class ControllerClass {
 	    String json=gson.toJson(empserv.submitReimbursement(reimbursement));
 		response.getWriter().append(json);
 		
-		//HttpSession sess= request.getSession();
-		//sess.setAttribute("username", uname);
-		
-	/*	String body=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
-	    Gson gson = new Gson();
-	    
-	    //turn a json into an object u have to tell it what type of obj to turn it into
-	    Task task=gson.fromJson(body, Task.class);
-	    tserv.createTask(task);
-	    response.getWriter().append("Created Task. Success!");*/
-		
-		//request.getRequestDispatcher("EmpHomePage.html").include(request, response);
-		      	
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	
 	public void EmpGetReimb(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -175,5 +171,61 @@ public class ControllerClass {
 
 	    String json=gson.toJson(manserv.viewAllReimbursementsbyMId(mid));
 		response.getWriter().append(json);
+		}
+	
+	public void ManGetSubReimb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+	    //String body=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
+	    Gson gson = new Gson();
+	    
+		int mid= (int) request.getSession().getAttribute("manid");
+
+	    String json=gson.toJson(manserv.viewAllSubmittedReimbursements(mid));
+		response.getWriter().append(json);
+		}
+	
+	public void ManApproveReimb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		/*String reimbid=request.getParameter("reimbid");
+		int rid=Integer.parseInt(reimbid);
+		System.out.println("Reimb id to be approved "+rid);
+	    //String body=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
+	    Gson gson = new Gson();
+	    
+		int mid= (int) request.getSession().getAttribute("manid");
+		
+
+	    String json=gson.toJson(manserv.approveReimbursement(rid));
+		response.getWriter().append(json);*/
+		
+		Gson gson=new Gson();
+		String json=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
+		Reimbursement reimb=gson.fromJson(json, Reimbursement.class);
+		manserv.approveReimbursement(reimb);
+		System.out.println("Approved Reimb"+ reimb.getrId());
+	    //tserv.markTaskComplete(task);
+	    response.getWriter().append("Successfully Approved Reimb.");
+		}
+	public void ManDenyReimb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		
+		Gson gson=new Gson();
+		String json=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
+		Reimbursement reimb=gson.fromJson(json, Reimbursement.class);
+		manserv.denyReimbursement(reimb);
+		System.out.println("Denied Reimb"+ reimb.getrId());
+	    //tserv.markTaskComplete(task);
+	    response.getWriter().append("Successfully Denied Reimb.");
+	    
+	    /*String reimbid=request.getParameter("reimbid");
+		int rid=Integer.parseInt(reimbid);
+	    //String body=request.getReader().lines().reduce("", (accumulator,actual)->accumulator+actual);
+	    Gson gson = new Gson();
+	    
+		int mid= (int) request.getSession().getAttribute("manid");
+		
+
+	    String json=gson.toJson(manserv.denyReimbursement(rid));
+		response.getWriter().append(json);*/
 		}
 }

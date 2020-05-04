@@ -6,11 +6,11 @@
 
      <style>
       body {
-          background-image: url('ProdigyMan.jpg');
+          background-image: url('EmpLogin.jpeg');
            background-repeat: no-repeat; 
            background-attachment: fixed; 
           /*  background-size: cover;  */
-           background-size: 90% 90%;
+           background-size: 100% 100%;
           
           }
        
@@ -40,30 +40,28 @@
 
 
 <body style="text-align: center;">
- <img alt="Brand" src="ProdigyBg.jpg" class="img-circle" alt="Cinque Terre" width="150" height="100"></a>
-<h1>Prodigy Welcomes You!</h1>
+ <img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="150" height="150"></a>
+<h1>Fusion Welcomes You!</h1>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
+
 <div class="box">
+<img alt="Brand" src="ManAvatar.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
 <h3>Manager Login Page</h1>
     Enter Username<input id="userNameInput" type="text" placeholder="username">
     <br>
    
-    Enter Password<input id="passwordInput" type="text" placeholder="password">
+    Enter Password<input id="passwordInput" type="password" placeholder="password">
     
     <br>
     <button onclick="login()"> Login </button>
     
 </div>
-    
+<br>
+<a href="EmployeeLoginPage.html"> Login As Employer</a>
 </body>    
   
 
@@ -75,7 +73,7 @@
         let username=document.getElementById("userNameInput").value;
         let password=document.getElementById("passwordInput").value;
 
-        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManagerServlet?username="+username+"&password="+password);
+        let httpResponse= await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManloginServlet?username="+username+"&password="+password);
         //let body=httpResponse.json();
 
         //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")

@@ -1,91 +1,86 @@
+<!DOCTYPE html>
+
 <html>
-<body>
 
-<h1>Prodigy</h1>
+<head>
 
-<p>Welcome to the best to-do app on the web</p>
-
-<h2>Task</h2>
-<input id="descInput" type="text" placeholder="task">
-<input id="priorityInput" type="text" placeholder="priority">
-<button id="addTaskBtn"> Add Task</button>
-
-<h2>All Tasks</h2>
-<button id="allTasksBtn"> Get all Tasks</button>
-
-<table id="taskTable">
-  <tr><thead> <th> Description</th> <th> Priority </th> <th>Completed</th></thead> </tr>
-  <tr >
-</table>
-
-</body>
-
-<script>
-
-      document.getElementById("allTasksBtn").addEventListener("click",getAllTasks)
-      document.getElementById("addTaskBtn").addEventListener("click",addTask)
-
-      async function getAllTasks(){
-          let httpResponse=await fetch("http://localhost:8080/ToDoListApp/api/tasks");
-          let tasks= await httpResponse.json();
-
-          let tableData=document.getElementById("taskTable");
-
-          for(task of tasks){
-              tableData.innerHTML=tableData.innerHTML + `<tr> <td>${task.description}</td>
-                <td>${task.priority}</td> <td>${task.isDone}</td> <td> <button tId=${task.tId} desc="${task.description}"  priority=${task.priority} onclick="approve(this)"> Mark Complete </td> </tr> `;
+     <style>
+      body {
+          background-image: url('HomePg.jpg');
+           background-repeat: no-repeat; 
+           background-attachment: center; 
+          /*  background-size: cover;  */
+           background-size: 100% 80%;
+          
           }
-          console.log(tasks);
+       
+      .box{
+			margin:0 auto; 
+			width:400px; /* //you can set it in %. */
+			padding:75px;
+			background:#f9f9f9;
+			border:2px solid #333;
+		}
+      </style>
+      
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
 
-      }
 
-      async function addTask(){
+<body style="text-align: center;">
+ <!-- <img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="200" height="150"></a> -->
+<h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: tomato;">Fusion Welcomes You!</h1>
+<br>
+<br>
+<br> 
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br> 
+<br>
+<br>
 
-         let task={
-             tId:0,
-             isDone:false
 
-         }
+<!-- <div class="box"> -->
+<img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="200" height="150"></a>
+<br>
+<div class="row">
+ 
+    
+    <div class="col-sm-4">
+    <img alt="Brand" src="EmpAvatar.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
+    <br>
+    <a href="EmployeeLoginPage.html"> Login As Employer</a>
+    </div>
+    
+    <div class="col-sm-4"></div>
 
-         task.description=document.getElementById("descInput").value;
-         task.priority=Number.parseInt(document.getElementById("priorityInput").value);
+    <div class="col-sm-4">
+    <img alt="Brand" src="ManAvatar.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
+    <br>
+    <a href="ManagerLoginPage.html"> Login As Manager</a>
+    </div>
 
-         console.log(task);
-
-          let settings={
-             method:'POST',
-             headers:{'Content-Type':'application/json'},
-             body:JSON.stringify(task)
-         }
-
-         let httpResponse=await fetch("http://localhost:8080/ToDoListApp/api/addtask", settings);
-        
-      }
-
-      async function approve(element){
-             console.log("Hello");
-             console.log(element.tId);
-
-             let tId=element.tId;
-
-             task.tId=element.tId;
-             task.description=element.desc;
-             task.isDone=true;
-             task.priority=element.priority;
-             console.log(task);
-             console.log(element);
-
-             let settings={
-             method:'POST',
-             headers:{'Content-Type':'application/json'},
-             body:JSON.stringify(task)
-         }
-
-         let httpResponse=await fetch("http://localhost:8080/ToDoListApp/api/updatetask", settings)
-         
-         console.log(httpResponse);
-      }
-</script>
+     
+</div>  
+<!-- </div> -->
+    
+</body>    
+  
 
 </html>
-

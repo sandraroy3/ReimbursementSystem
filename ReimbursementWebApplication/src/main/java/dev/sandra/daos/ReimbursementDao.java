@@ -18,12 +18,13 @@ public interface ReimbursementDao {
 	
 	
 	List<Reimbursement> retrieveAllReimbursementsByMId(int id);
-
-	List<Reimbursement> retrieveSubmittedTasksByMId(int id);
+	List<Reimbursement> retrieveSubmittedReimbByMId(int id);
+	List<Reimbursement> retrieveApprovedReimbByMId(int id);
+	List<Reimbursement> retrieveDeniedReimbByMId(int id);
 	//List<Reimbursement> retrieveCompletedTasks();
 	
-	Reimbursement approveReimbursement(int id);
-	Reimbursement denyReimbursement(int id);
+	Reimbursement approveReimbursement(Reimbursement reimbursement);
+	Reimbursement denyReimbursement(Reimbursement reimbursement);
 	
 	Reimbursement updateReimbursement(Reimbursement reimbursement);
 	

@@ -55,17 +55,12 @@
 <nav class="navbar navbar-inverse" height="300px">
   <div class="container-fluid">
     <div class="navbar-header">
-    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="ProdigyBg.jpg" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
          
     </div>
     <ul class="nav navbar-nav">
       <li><a href="EmpHomePage.html">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
-        <ul class="dropdown-menu" style="background-color:darkblue">
-          <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
-          <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
-         </ul>
-      </li>
+      <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
       <li><a href="#">Update Details</a></li>
       
     </ul>
@@ -78,16 +73,16 @@
 </nav>
 
 <div class="container">
- <img src="ProdigyBg.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <img src="Reimb.png" alt="prodigyhome" style="float:right;width:400px;height:400px;">
 
 <h2>All Reimbursements</h2>
 <br>
 <br>
-<button id="allReimbsBtn"> Get all Reimbursements</button>
+<!-- <button id="allReimbsBtn"> Get all Reimbursements</button> -->
 <br>
 <br>
 <table id="ReimbTable">
-  <tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th></thead> </tr>
+  <tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Manager Id</th> <th>Req. Id</th></thead> </tr>
   <tr >
 </table>
 
@@ -95,36 +90,9 @@
 
 </body>
 
-<!--  </style>
-</head>
-<body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="..../resources/images/ProdigyBg.jpg">Prodigy</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="EmpHomePage.html">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reimbursements <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="EmpSubmitReimbPage.html">Submit reimbursement</a></li>
-          <li><a href="EmpviewReimbPage.html">View Reimbursements</a></li>
-         </ul>
-      </li>
-      <li><a href="#">Update Details</a></li>
-      <li><a href="EmployeeLoginPage.html">Logout</a></li>
-    </ul>
-  </div>
-</nav>
-  
-</body>  -->
-
-
-
 <script>
 
-      document.getElementById("allReimbsBtn").addEventListener("click",getAllReimbs)
+/*       document.getElementById("allReimbsBtn").addEventListener("click",getAllReimbs) */
       
       async function getAllReimbs(){
           let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/EmpGetReimbServ");
@@ -134,22 +102,18 @@
 
           for(reimb of reimbs){
               tableData.innerHTML=tableData.innerHTML + `<tr> 
-                                <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td> `;
+                                <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.mId} </td> <td> ${reimb.requesterId} </td> `;
           }
           console.log(reimbs);
 
 
-        //   let httpResponse=await fetch("http://localhost:8080/ToDoListApp/api/tasks");
-        //   let tasks= await httpResponse.json();
-
-        //   let tableData=document.getElementById("taskTable");
-
-        //   for(task of tasks){
-        //       tableData.innerHTML=tableData.innerHTML + `<tr> <td>${task.description}</td>
-        //         <td>${task.priority}</td> <td>${task.isDone}</td> <td> <button tId=${task.tId} desc="${task.description}"  priority=${task.priority} onclick="approve(this)"> Mark Complete </td> </tr> `;
-        //   }
-        //   console.log(tasks);
       }
+      getAllReimbs();
+      
+      /* function goBackHome(){
+      window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+      }
+      goBackHome(); */
 </script>
 
 </html>

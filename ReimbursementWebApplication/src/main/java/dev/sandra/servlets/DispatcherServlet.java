@@ -41,9 +41,12 @@ public class DispatcherServlet extends HttpServlet {
 		   break;
 		case "/ReimbursementWebApplication/api/ManGetReimbServ": controller.ManGetReimb(request, response);
 			break;
-		/*case "/ReimbursementWebApplication/api/EmpGetReimbServ": controller.EmpGetReimb(request, response);
-			break;*/
-		                               
+		case "/ReimbursementWebApplication/api/ManGetSubReimbServ": controller.ManGetSubReimb(request, response);
+			break;
+		case "/ReimbursementWebApplication/api/ManApproveReimbServ": controller.ManApproveReimb(request, response);
+			break;
+		case "/ReimbursementWebApplication/api/ManDenyReimbServ": controller.ManDenyReimb(request, response);;
+			break;                              
 		/*case "/ReimbursementWebApplication/api/addtask": tcontroller.addTask(request, response);
                                        break;
 		case "/ReimbursementWebApplication/api/pendingtasks": tcontroller.getPendingTasks(request, response);

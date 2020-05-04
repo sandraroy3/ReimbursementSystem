@@ -50,15 +50,15 @@ public class ManagerServiceTests {
 	
 	 @Test
 		public void getAllSubReimb(){
-			List<Reimbursement> reimb=managserv.submittedReimbursements(1);
+			List<Reimbursement> reimb=managserv.viewAllSubmittedReimbursements(1);
 			System.out.println("All sub reimb "+reimb);
 		}
 	 
-	 @Test
+	/* @Test
 		public void approveReimb(){
-			Reimbursement reimb=managserv.approveReimbursement(2);
+			Reimbursement reimb=managserv.approveReimbursement(1));
 			System.out.println("Approved reimb "+reimb);
-		}
+		}*/
 	 
 	/* @Test
 		public void denyReimb(){

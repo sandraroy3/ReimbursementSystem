@@ -27,25 +27,28 @@ public class ManagerServiceImpl implements ManagerServices{
 	}
 
 	@Override
-	public List<Reimbursement> submittedReimbursements(int id) {
-		List<Reimbursement> subreimbursements =reimbdao.retrieveSubmittedTasksByMId(id);
+	public List<Reimbursement> viewAllSubmittedReimbursements(int id) {
+		List<Reimbursement> subreimbursements =reimbdao.retrieveSubmittedReimbByMId(id);
 		return subreimbursements;
 	}
 
 	@Override
-	public Reimbursement approveReimbursement(int id) {
+	public Reimbursement approveReimbursement(Reimbursement reimbursement) {
 		//Reimbursement reimbursement=reimbdao.getReimbursementById(id);
-		Reimbursement reimbursement=reimbdao.approveReimbursement(id);
-		return reimbursement;
+		Reimbursement reimbursement1=reimbdao.approveReimbursement(reimbursement);
+		return reimbursement1;
 	}
 
 	@Override
-	public Reimbursement denyReimbursement(int id) {
+	public Reimbursement denyReimbursement(Reimbursement reimbursement) {
 		//Reimbursement reimbursement=reimbdao.getReimbursementById(id);
-		Reimbursement reimbursement=reimbdao.denyReimbursement(id);
-		return reimbursement;
+		Reimbursement reimbursement2=reimbdao.denyReimbursement(reimbursement);
+		return reimbursement2;
 	}
 
+	
+	
+	
 	@Override
 	public Manager logoutManager(Manager manager) {
 		// TODO Auto-generated method stub

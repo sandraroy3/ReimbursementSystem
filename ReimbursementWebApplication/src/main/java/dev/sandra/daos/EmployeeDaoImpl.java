@@ -18,7 +18,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			ps.setString(2, password);
 			
 			ResultSet rs= ps.executeQuery();
-			rs.next();
+			
+			if(rs.next()) {
 			
 			Employee employee=new Employee();
 			employee.seteId(rs.getInt("E_ID"));
@@ -27,6 +28,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			//employee.setPhno(phno);
 			
             return employee;
+			}
+			
+			else {
+				return null;
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return null;

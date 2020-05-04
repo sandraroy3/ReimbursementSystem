@@ -55,12 +55,12 @@
 <nav class="navbar navbar-inverse" height="300px">
   <div class="container-fluid">
     <div class="navbar-header">
-    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="ProdigyBg.jpg" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
+    <!-- <a class="navbar-brand" href="index.jsp">  --><img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="100" height="80"></a>
          
     </div>
     <ul class="nav navbar-nav">
       <li><a href="ManHomePage.html">Home</a></li>
-      <li><a href="ManViewReimbPage.html">View reimbursements</a></li>
+      <li><a href="ManViewSubReimbPage.html">View All Submitted Reimbursements</a></li>
       <li><a href="#">Update Details</a></li>
       
     </ul>
@@ -73,17 +73,20 @@
 </nav>
 
 <div class="container">
- <img src="ProdigyBg.jpg" alt="prodigyhome" style="float:right;width:400px;height:400px;">
+ <img src="Reimb.png" alt="prodigyhome" style="float:right;width:300px;height:300px;">
 
+
+ <div class="jumbotron">
 <h2>All Reimbursements</h2>
 <br>
 <br>
-<button id="allReimbsBtn"> Get all Reimbursements</button>
+ <button id="allReimbsBtn" class="btn btn-primary btn-lg"> Get all Reimbursements</button>
 <br>
 <br>
+</div>
+
 <table id="ReimbTable">
-  <tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th></thead> </tr>
-  <tr >
+  
 </table>
 
 </div>
@@ -126,25 +129,101 @@
           let reimbs= await httpResponse.json();
 
           let tableData=document.getElementById("ReimbTable");
-
+          tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> </tr>
+          <tr >`;
           for(reimb of reimbs){
               tableData.innerHTML=tableData.innerHTML + `<tr> 
-                                <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td> `;
+               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>`;
+              
+                    
           }
-          console.log(reimbs);
 
-
-        //   let httpResponse=await fetch("http://localhost:8080/ToDoListApp/api/tasks");
-        //   let tasks= await httpResponse.json();
-
-        //   let tableData=document.getElementById("taskTable");
-
-        //   for(task of tasks){
-        //       tableData.innerHTML=tableData.innerHTML + `<tr> <td>${task.description}</td>
-        //         <td>${task.priority}</td> <td>${task.isDone}</td> <td> <button tId=${task.tId} desc="${task.description}"  priority=${task.priority} onclick="approve(this)"> Mark Complete </td> </tr> `;
-        //   }
-        //   console.log(tasks);
       }
+        //  async function approveReimb(element){
+            
+        //     let reimb = {};
+        //     reimb.rId = element.getAttribute("rId");
+        //     reimb.amt = Number.parseInt(element.getAttribute("amt"));
+        //     reimb.status = element.getAttribute("status");
+        //     //reimb.priority = Number.parseInt(element.getAttribute("priority"));
+        //     console.log(reimb)
+        //     //console.log(element)
+
+        //       let settings = {
+        //       method:'POST',
+        //         headers:{'Content-Type':'application/json'},
+        //         body: JSON.stringify(reimb)
+        //       }
+
+        //         let httpResponse = await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManApproveReimbServ", settings); 
+
+ 
+        //           let reimbs= await httpResponse.json();
+
+        //           let tableData=document.getElementById("ReimbTable");
+        //           tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> <th>Approve Reimbursement</th> <th>Deny Reimbursement</th> </thead> </tr>
+        //           <tr >`;
+        //           for(reimb of reimbs){
+        //               tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //               <td> <button rId=${reimb.rId} amt=${reimb.amount} status="${reimb.status}" onclick="approveReimb(this);"> Approve Reimbursements</button></td> <td><button rId=${reimb.rId} desc=${reimb.amount} status= "${reimb.status}" onclick="denyReimb(this);"> Deny Reimbursement</button> </td> </tr> `;
+                            
+        //           }
+
+        //     }
+        //       // let httpResponse=await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManApproveReimbServ?rid="+`${reimb.requesterId}`);
+        //       // let reimbs= await httpResponse.json();
+
+        //       // let tableData=document.getElementById("ReimbTable");
+
+        //       // for(reimb of reimbs){
+        //       //    tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //       //    <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //       //    <td> <button onclick="approveReimb()"> Approve Reimbursements</button></td> <td><button onclick="denyReimb()"> Deny Reimbursement</button> </td> </tr> `;
+        //       //       }
+        //       //   }
+        //     async function denyReimb(element){
+              
+        //     let reimb = {};
+        //     reimb.rId = element.getAttribute("rId");
+        //     reimb.amt = Number.parseInt(element.getAttribute("amt"));
+        //     reimb.status = element.getAttribute("status");
+        //     //reimb.priority = Number.parseInt(element.getAttribute("priority"));
+        //     console.log(reimb)
+        //     //console.log(element)
+
+        //       let settings = {
+        //       method:'POST',
+        //         headers:{'Content-Type':'application/json'},
+        //         body: JSON.stringify(reimb)
+        //       }
+
+        //         let httpResponse = await fetch("http://localhost:8080/ReimbursementWebApplication/api/ManDenyReimbServ", settings); 
+
+        //           let reimbs= await httpResponse.json();
+
+        //           let tableData=document.getElementById("ReimbTable");
+        //           tableData.innerHTML=tableData.innerHTML + `<tr><thead> <th> Reimb. Id </th> <th> Amount </th> <th> Description</th> <th> Status </th> <th>Req Id</th> <th>Approve Reimbursement</th> <th>Deny Reimbursement</th> </thead> </tr>
+        //           <tr >`;
+        //           for(reimb of reimbs){
+        //               tableData.innerHTML=tableData.innerHTML + `<tr> 
+        //               <td>${reimb.rId}</td> <td>${reimb.amount}</td> <td> ${reimb.description} </td> <td> ${reimb.status}</td> <td> ${reimb.requesterId} </td>
+        //               <td> <button rId=${reimb.rId} amt=${reimb.amount} status="${reimb.status}" onclick="approveReimb(this);"> Approve Reimbursements</button></td> <td><button rId=${reimb.rId} desc=${reimb.amount} status= "${reimb.status}" onclick="denyReimb(this);"> Deny Reimbursement</button> </td> </tr> `;
+                            
+        //           }
+
+
+            //     console.log(httpResponse)
+
+            // }
+
+
+      //     console.log(reimbs);
+
+      // }
+      
+      
 </script>
 
 </html>
+

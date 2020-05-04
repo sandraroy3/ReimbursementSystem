@@ -11,14 +11,15 @@ public interface ManagerServices {
 	
 
 	public List<Reimbursement> viewAllReimbursementsbyMId(int id);
-	public List<Reimbursement> submittedReimbursements(int id);
+	public List<Reimbursement> viewAllSubmittedReimbursements(int id);
 	
 	//public Reimbursement submitReimbursement(Reimbursement reimbursement);
 
-	public Reimbursement approveReimbursement(int id);
+	public Reimbursement approveReimbursement(Reimbursement reimbursement);
 	//public Reimbursement approveReimbursement(Reimbursement reimbursement, boolean isApproved);
 	
-	public Reimbursement denyReimbursement(int id);
+	public Reimbursement denyReimbursement(Reimbursement reimbursement);
+	
 	
 	
 	Manager logoutManager(Manager manager);

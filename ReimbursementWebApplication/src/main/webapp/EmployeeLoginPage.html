@@ -6,11 +6,11 @@
 
      <style>
       body {
-          background-image: url('ProdigyBigBg.jpg');
+          background-image: url('EmpLogin.jpeg');
            background-repeat: no-repeat; 
            background-attachment: fixed; 
           /*  background-size: cover;  */
-           background-size: 90% 90%;
+           background-size: 100% 100%;
           
           }
        
@@ -40,30 +40,28 @@
 
 
 <body style="text-align: center;">
- <img alt="Brand" src="ProdigyBg.jpg" class="img-circle" alt="Cinque Terre" width="150" height="100"></a>
-<h1>Prodigy Welcomes You!</h1>
+ <img alt="Brand" src="FusionLogo.png" class="img-circle" alt="Cinque Terre" width="200" height="150"></a>
+<h1>Fusion Welcomes You!</h1>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
 <div class="box">
+ <img alt="Brand" src="EmpAvatar.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
 <h3>Employee Login Page</h1>
     Enter Username<input id="userNameInput" type="text" placeholder="username">
     <br>
    
-    Enter Password<input id="passwordInput" type="text" placeholder="password">
+    Enter Password<input id="passwordInput" type="password" placeholder="password">
     
     <br>
     <button onclick="login()"> Login </button>
     
+    <h3 id="msg"></h3>
 </div>
-    
+<br>
+<a href="ManagerLoginPage.html" width="100px" height="100px"> Login As Manager</a>
 </body>    
   
 
@@ -80,7 +78,13 @@
 
         //let httpResponse= await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username=+username")
 
-        window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
+        let body= await httpResponse.text();
+
+        document.getElementById("msg").innerHTML = body;
+
+        // console.log("Finished showuser(). Logged in user"+body);
+
+       window.location.href = "http://localhost:8080/ReimbursementWebApplication/EmpHomePage.html";
         
     }
 </script>

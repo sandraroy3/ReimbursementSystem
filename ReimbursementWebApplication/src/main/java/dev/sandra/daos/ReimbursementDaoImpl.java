@@ -103,7 +103,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	@Override
 	public List<Reimbursement> retrieveAllReimbursementsByMId(int id) {
 		try(Connection conn= ConnectionUtils.createConnection()){
-			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE M_ID=?";
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE M_ID=? ORDER BY E_ID ";
 	        PreparedStatement ps=conn.prepareStatement(sql);
 	        ps.setInt(1, id);
 	        
@@ -132,7 +132,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	}
 	
 	@Override
-	public List<Reimbursement> retrieveSubmittedTasksByMId(int id) {
+	public List<Reimbursement> retrieveSubmittedReimbByMId(int id) {
 		try(Connection conn= ConnectionUtils.createConnection()){
 			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE STATUS=? AND M_ID=?";
 	        PreparedStatement ps=conn.prepareStatement(sql);
@@ -163,11 +163,74 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	return null;
 	}
 	
+	@Override
+	public List<Reimbursement> retrieveApprovedReimbByMId(int id) {
+		try(Connection conn= ConnectionUtils.createConnection()){
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE STATUS=? AND M_ID=?";
+	        PreparedStatement ps=conn.prepareStatement(sql);
+	        ps.setString(1, "APPROVED");
+	        ps.setInt(2, id);
+	        
+	        ResultSet rs=ps.executeQuery();
+	        
+	        List<Reimbursement> reimbursements=new ArrayList<Reimbursement>();
+	        
+	        while(rs.next()) {
+	        
+	        	Reimbursement reimbursement=new Reimbursement();
+	        	reimbursement.setrId(rs.getInt("R_ID"));
+	        	reimbursement.setAmount(rs.getInt("AMOUNT"));
+	        	reimbursement.setDescription(rs.getString("DESCRIPTION"));
+	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
+	        	reimbursement.setStatus(rs.getString("STATUS"));
+	        	reimbursement.setmId(rs.getInt("M_ID"));
+	       
+	        
+	        	reimbursements.add(reimbursement);
+	        }
+	        return reimbursements;
+		}catch(SQLException e) {
+	  	e.printStackTrace();
+	   }
+	return null;
+	}
+	
+	@Override
+	public List<Reimbursement> retrieveDeniedReimbByMId(int id) {
+		try(Connection conn= ConnectionUtils.createConnection()){
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT WHERE STATUS=? AND M_ID=?";
+	        PreparedStatement ps=conn.prepareStatement(sql);
+	        ps.setString(1, "DENIED");
+	        ps.setInt(2, id);
+	        
+	        ResultSet rs=ps.executeQuery();
+	        
+	        List<Reimbursement> reimbursements=new ArrayList<Reimbursement>();
+	        
+	        while(rs.next()) {
+	        
+	        	Reimbursement reimbursement=new Reimbursement();
+	        	reimbursement.setrId(rs.getInt("R_ID"));
+	        	reimbursement.setAmount(rs.getInt("AMOUNT"));
+	        	reimbursement.setDescription(rs.getString("DESCRIPTION"));
+	        	reimbursement.setRequesterId(rs.getInt("E_ID"));
+	        	reimbursement.setStatus(rs.getString("STATUS"));
+	        	reimbursement.setmId(rs.getInt("M_ID"));
+	       
+	        
+	        	reimbursements.add(reimbursement);
+	        }
+	        return reimbursements;
+		}catch(SQLException e) {
+	  	e.printStackTrace();
+	   }
+	return null;
+	}
 	
 	/*@Override
 	public List<Reimbursement> retrieveAllReimbursements() {
 		try(Connection conn= ConnectionUtils.createConnection()){
-			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT";
+			String sql="SELECT * FROM Project1Reimbursements.REIMBURSEMENT ";
 	        PreparedStatement ps=conn.prepareStatement(sql);
 	       
 	        ResultSet rs=ps.executeQuery();
@@ -196,13 +259,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 
 	
 	@Override
-	public Reimbursement approveReimbursement(int id) {
+	public Reimbursement approveReimbursement(Reimbursement reimbursement) {
 		try(Connection conn=ConnectionUtils.createConnection()){
 			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS=? WHERE R_ID=?";
 			PreparedStatement ps=conn.prepareStatement(sql);
 			
 			ps.setString(1, "APPROVED");
-			ps.setInt(2, id);
+			ps.setInt(2, reimbursement.getrId());
 						
 			boolean success=ps.execute();
 			
@@ -215,13 +278,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 	}
 	
 	@Override
-	public Reimbursement denyReimbursement(int id) {
+	public Reimbursement denyReimbursement(Reimbursement reimbursement) {
 		try(Connection conn=ConnectionUtils.createConnection()){
 			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS=? WHERE R_ID=?";
 			PreparedStatement ps=conn.prepareStatement(sql);
 			
 			ps.setString(1,"DENIED" );
-			ps.setInt(2, id);
+			ps.setInt(2, reimbursement.getrId());
 						
 			boolean success=ps.execute();
 			
