@@ -33,17 +33,17 @@ public class ManagerServiceImpl implements ManagerServices{
 	}
 
 	@Override
-	public Reimbursement approveReimbursement(Reimbursement reimbursement) {
+	public boolean approveReimbursement(Reimbursement reimbursement) {
 		//Reimbursement reimbursement=reimbdao.getReimbursementById(id);
-		Reimbursement reimbursement1=reimbdao.approveReimbursement(reimbursement);
-		return reimbursement1;
+		return reimbdao.approveReimbursement(reimbursement);
+		//return reimbursement1;
 	}
 
 	@Override
-	public Reimbursement denyReimbursement(Reimbursement reimbursement) {
+	public boolean denyReimbursement(Reimbursement reimbursement) {
 		//Reimbursement reimbursement=reimbdao.getReimbursementById(id);
-		Reimbursement reimbursement2=reimbdao.denyReimbursement(reimbursement);
-		return reimbursement2;
+		return reimbdao.denyReimbursement(reimbursement);
+		//return reimbursement2;
 	}
 
 	

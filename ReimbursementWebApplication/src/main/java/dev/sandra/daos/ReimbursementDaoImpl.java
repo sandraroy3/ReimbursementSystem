@@ -259,41 +259,44 @@ public class ReimbursementDaoImpl implements ReimbursementDao{
 
 	
 	@Override
-	public Reimbursement approveReimbursement(Reimbursement reimbursement) {
+	public boolean approveReimbursement(Reimbursement reimbursement) {
 		try(Connection conn=ConnectionUtils.createConnection()){
-			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS=? WHERE R_ID=?";
+			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS='APPROVED' WHERE R_ID=?";
 			PreparedStatement ps=conn.prepareStatement(sql);
 			
-			ps.setString(1, "APPROVED");
-			ps.setInt(2, reimbursement.getrId());
+			//ps.setString(1, "APPROVED");
+			ps.setInt(1, reimbursement.getrId());
 						
 			boolean success=ps.execute();
 			
-			//return reimbursement;
+			return success;
 			
          } catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return null;
+		//return null;
 	}
 	
 	@Override
-	public Reimbursement denyReimbursement(Reimbursement reimbursement) {
+	public boolean denyReimbursement(Reimbursement reimbursement) {
 		try(Connection conn=ConnectionUtils.createConnection()){
-			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS=? WHERE R_ID=?";
+			String sql="UPDATE Project1Reimbursements.REIMBURSEMENT SET STATUS='DENIED' WHERE R_ID=?";
 			PreparedStatement ps=conn.prepareStatement(sql);
 			
-			ps.setString(1,"DENIED" );
-			ps.setInt(2, reimbursement.getrId());
+			//ps.setString(1,"DENIED" );
+			ps.setInt(1, reimbursement.getrId());
 						
 			boolean success=ps.execute();
 			
+			return success;
 			//return reimbursement;
 			
          } catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return null;
+		//return null;
 	}
 
 	@Override

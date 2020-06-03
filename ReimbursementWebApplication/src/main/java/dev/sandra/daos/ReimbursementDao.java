@@ -23,8 +23,8 @@ public interface ReimbursementDao {
 	List<Reimbursement> retrieveDeniedReimbByMId(int id);
 	//List<Reimbursement> retrieveCompletedTasks();
 	
-	Reimbursement approveReimbursement(Reimbursement reimbursement);
-	Reimbursement denyReimbursement(Reimbursement reimbursement);
+	boolean approveReimbursement(Reimbursement reimbursement);
+	boolean denyReimbursement(Reimbursement reimbursement);
 	
 	Reimbursement updateReimbursement(Reimbursement reimbursement);
 	

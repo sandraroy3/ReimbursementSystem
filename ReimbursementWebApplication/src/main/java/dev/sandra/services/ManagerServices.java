@@ -15,10 +15,10 @@ public interface ManagerServices {
 	
 	//public Reimbursement submitReimbursement(Reimbursement reimbursement);
 
-	public Reimbursement approveReimbursement(Reimbursement reimbursement);
+	public boolean approveReimbursement(Reimbursement reimbursement);
 	//public Reimbursement approveReimbursement(Reimbursement reimbursement, boolean isApproved);
 	
-	public Reimbursement denyReimbursement(Reimbursement reimbursement);
+	public boolean denyReimbursement(Reimbursement reimbursement);
 	
 	
 	
